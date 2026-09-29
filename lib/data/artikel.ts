@@ -24,19 +24,19 @@ export const artikelList: Artikel[] = [
     excerpt: "Air putih adalah fondasi utama kerja organ tubuh manusia. Memenuhi hidrasi harian mendukung konsentrasi, metabolisme, dan daya tahan tubuh.",
     isi: `Tubuh manusia terdiri dari sekitar 60% cairan. Setiap sel, jaringan, dan organ memerlukan air agar dapat berfungsi sebagaimana mestinya. Sayangnya, banyak orang sering mengabaikan asupan hidrasi harian hingga muncul tanda-tanda dehidrasi ringan.
 
-### 1. Menjaga Konsentrasi dan Fungsi Kognitif
+ 1. Menjaga Konsentrasi dan Fungsi Kognitif
 Penelitian menunjukkan bahwa kehilangan cairan tubuh sebanyak 1-2% saja sudah dapat memicu penurunan konsentrasi, sakit kepala ringan, serta penurunan daya ingat jangka pendek.
 
-### 2. Membantu Metabolisme dan Kontrol Berat Badan
+ 2. Membantu Metabolisme dan Kontrol Berat Badan
 Minum segelas air putih sebelum makan dapat memberikan rasa kenyang alami dan merangsang proses pembakaran kalori tubuh secara optimal.
 
-### 3. Menjaga Elastisitas dan Kesehatan Kulit
+ 3. Menjaga Elastisitas dan Kesehatan Kulit
 Kekurangan air membuat kulit tampak kusam, kering, dan lebih rentan terhadap iritasi. Hidrasi cukup membantu membuang racun metabolik melalui keringat dan urine.
 
-### 4. Mendukung Fungsi Ginjal
+ 4. Mendukung Fungsi Ginjal
 Ginjal membutuhkan cairan yang cukup untuk menyaring zat sisa dari darah dan membuangnya melalui urine. Kurang minum air dalam jangka panjang berisiko memicu batu ginjal.
 
-### Tips Praktis Memenuhi Kebutuhan Air:
+ Tips Praktis Memenuhi Kebutuhan Air:
 - Siapkan botol minum berukuran 1 liter di meja kerja Anda.
 - Minum 1 gelas air hangat begitu bangun di pagi hari.
 - Tambahkan irisan lemon atau mentimun (infused water) bila menyukai sensasi segar alami.`,

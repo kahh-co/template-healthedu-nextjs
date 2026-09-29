@@ -1,0 +1,8 @@
+{
+  "$schema": "https://scaffdev.vercel.app/schemas/scaff.template.json",
+  "name": "template-healthedu",
+  "slug": "template-healthedu",
+  "framework": "nextjs",
+  "provides": {},
+  "removalGuides": {}
+}

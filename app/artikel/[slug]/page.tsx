@@ -21,6 +21,21 @@ import ArtikelCard from "@/components/ui/ArtikelCard";
 import ShareButtons from "./ShareButtons";
 import { formatTanggalIndo } from "@/lib/utils";
 
+function renderInlineText(text: string) {
+  // Bersihkan sisa markdown heading kalau masih ada, lalu render **bold** jadi <strong>
+  const clean = text.replace(/^###\s*/, "").trim();
+  const parts = clean.split(/\*\*(.+?)\*\*/g);
+  return parts.map((part, i) =>
+    i % 2 === 1 ? (
+      <strong key={i} className="font-bold text-inherit">
+        {part}
+      </strong>
+    ) : (
+      <React.Fragment key={i}>{part}</React.Fragment>
+    )
+  );
+}
+
 interface PageProps {
   params: {
     slug: string;
@@ -139,31 +154,72 @@ export default function DetailArtikelPage({ params }: PageProps) {
         {/* Article Body Content */}
         <div className="prose prose-slate max-w-none mb-10 space-y-5 text-health-textMain font-body text-base sm:text-lg leading-relaxed">
           {artikel.isi.split("\n\n").map((block, idx) => {
-            if (block.startsWith("### ")) {
+            const cleanBlock = block.replace(/^###\s*/, "").trim();
+            const lines = cleanBlock.split("\n").filter((l) => l.trim() !== "");
+            const isListLine = (l: string) =>
+              /^\s*(?:[-*]|\d+[.)])\s+/.test(l);
+            const listLines = lines.filter(isListLine);
+            const nonListLines = lines.filter((l) => !isListLine(l));
+
+            // Blok campuran: subjudul + list (misal "Panduan Setup...:\n1. ...\n2. ...")
+            // Render subjudul dengan font normal (tidak dibesarkan), list tetap sebagai list.
+            if (nonListLines.length > 0 && listLines.length > 0) {
               return (
-                <h3
-                  key={idx}
-                  className="font-heading font-bold text-xl sm:text-2xl text-health-textMain pt-4 pb-1 border-b border-emerald-50"
-                >
-                  {block.replace("### ", "")}
-                </h3>
+                <div key={idx} className="space-y-3">
+                  {nonListLines.map((t, tIdx) => (
+                    <p
+                      key={tIdx}
+                      className="font-bold text-base sm:text-lg leading-relaxed text-health-textMain"
+                    >
+                      {renderInlineText(t)}
+                    </p>
+                  ))}
+                  <ul className="space-y-2.5 my-3 pl-4 list-disc list-inside bg-slate-50/80 p-4 rounded-xl border border-slate-100">
+                    {listLines.map((l, lIdx) => (
+                      <li
+                        key={lIdx}
+                        className="text-slate-700 text-sm sm:text-base leading-relaxed"
+                      >
+                        {renderInlineText(l.replace(/^\s*(?:[-*]|\d+[.)])\s+/, ""))}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               );
             }
-            if (block.startsWith("- ") || block.startsWith("1. ") || block.startsWith("2. ") || block.startsWith("3. ") || block.startsWith("4. ") || block.startsWith("5. ")) {
-              const lines = block.split("\n");
+
+            // Blok murni list
+            if (listLines.length > 0 && nonListLines.length === 0) {
               return (
-                <ul key={idx} className="space-y-2.5 my-3 pl-4 list-disc list-inside bg-slate-50/80 p-4 rounded-xl border border-slate-100">
-                  {lines.map((l, lIdx) => (
-                    <li key={lIdx} className="text-slate-700 text-sm sm:text-base leading-relaxed">
-                      {l.replace(/^[-\d.]+\s*/, "")}
+                <ul
+                  key={idx}
+                  className="space-y-2.5 my-3 pl-4 list-disc list-inside bg-slate-50/80 p-4 rounded-xl border border-slate-100"
+                >
+                  {listLines.map((l, lIdx) => (
+                    <li
+                      key={lIdx}
+                      className="text-slate-700 text-sm sm:text-base leading-relaxed"
+                    >
+                      {renderInlineText(l.replace(/^\s*(?:[-*]|\d+[.)])\s+/, ""))}
                     </li>
                   ))}
                 </ul>
               );
             }
+
+            // Paragraf biasa / subjudul tanpa list: pakai font normal, bold saja
+            const isSubheading =
+              cleanBlock.length < 120 && /:$/.test(cleanBlock.trim());
             return (
-              <p key={idx} className="leading-relaxed">
-                {block}
+              <p
+                key={idx}
+                className={
+                  isSubheading
+                    ? "font-bold text-base sm:text-lg leading-relaxed"
+                    : "leading-relaxed"
+                }
+              >
+                {renderInlineText(cleanBlock)}
               </p>
             );
           })}

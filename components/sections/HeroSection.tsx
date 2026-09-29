@@ -85,22 +85,6 @@ export default function HeroSection() {
                 <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/40 via-transparent to-transparent" />
               </div>
 
-              {/* Floating Stat Card 1 */}
-              <div className="absolute -bottom-5 -left-4 sm:-left-6 bg-white/95 backdrop-blur-md p-3.5 sm:p-4 rounded-2xl shadow-card border border-emerald-100 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-health-primary font-bold">
-                  98%
-                </div>
-                <div>
-                  <p className="text-xs text-health-textMuted font-medium">Kepuasan Pembaca</p>
-                  <p className="text-sm font-bold text-health-textMain font-heading">Artikel Teruji & Jelas</p>
-                </div>
-              </div>
-
-              {/* Floating Stat Card 2 */}
-              <div className="hidden sm:flex absolute -top-4 -right-4 bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-2xl shadow-card border border-emerald-100 items-center gap-2">
-                <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
-                <p className="text-xs font-semibold text-health-textMain">Update Rutin Setiap Pekan</p>
-              </div>
             </div>
           </div>
         </div>
